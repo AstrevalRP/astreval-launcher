@@ -5,6 +5,8 @@ const semver = require('semver')
 const DropinModUtil  = require('./assets/js/dropinmodutil')
 const { MSFT_OPCODE, MSFT_REPLY_TYPE, MSFT_ERROR } = require('./assets/js/ipcconstants')
 
+const { isAdmin } = require('./assets/js/ability')
+
 const settingsState = {
     invalid: new Set()
 }
@@ -1556,6 +1558,42 @@ function prepareUpdateTab(data = null){
     populateSettingsUpdateInformation(data)
 }
 
+// Fonction pour afficher ou cacher les onglets en fonction de l'état d'administrateur
+function setupTabVisibility() {
+    const selectedAccount = ConfigManager.getSelectedAccount();
+    const isUserAdmin = isAdmin(selectedAccount);
+
+    // List of tabs and nav items to toggle
+    const tabsToToggle = [
+        'settingsTabMods',
+        'settingsTabLauncher',
+        'settingsTabAbout',
+        'settingsTabUpdate'
+    ];
+
+    const navItemsToToggle = [
+        'settingsTabMods',
+        'settingsTabLauncher',
+        'settingsTabAbout',
+        'settingsTabUpdate'
+    ];
+
+    // Toggle each tab and nav item based on admin status
+    tabsToToggle.forEach(rScId => {
+        const tabElement = document.querySelector(`[rSc="${rScId}"]`);
+        if (tabElement) {
+            tabElement.style.display = isUserAdmin ? 'block' : 'none';
+        }
+    });
+
+    navItemsToToggle.forEach(rScId => {
+        const navElement = document.querySelector(`.settingsNavItem[rSc="${rScId}"]`);
+        if (navElement) {
+            navElement.style.display = isUserAdmin ? 'block' : 'none';
+        }
+    });
+}
+
 /**
  * Settings preparation functions.
  */
@@ -1570,6 +1608,9 @@ async function prepareSettings(first = false) {
         setupSettingsTabs()
         initSettingsValidators()
         prepareUpdateTab()
+
+        // Configure la visibilité des onglets
+        setupTabVisibility();
     } else {
         await prepareModsTab()
     }
