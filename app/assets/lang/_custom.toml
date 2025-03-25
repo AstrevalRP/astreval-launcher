@@ -10,8 +10,8 @@ mediaYouTubeURL = "https://www.youtube.com/@AstrevalRP"
 mediaDiscordURL = "http://discord.astrevalrp.fr"
 
 [ejs.settings]
-sourceGithubLink = "https://github.com/dscalZi/HeliosLauncher"
-supportLink = "https://github.com/dscalZi/HeliosLauncher/issues"
+sourceGithubLink = "https://github.com/AstrevalRP/astreval-launcher"
+supportLink = "https://github.com/AstrevalRP/astreval-launcher/issues"
 
 [ejs.welcome]
 welcomeHeader = "Bienvenue sur Astreval RP"
