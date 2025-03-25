@@ -1,5 +1,5 @@
 appId: 'astrevalrp'
-productName: 'Astreval RP Launcher'
+productName: 'Astreval RP'
 artifactName: '${productName}-setup-${version}.${ext}'
 
 copyright: 'Copyright © 2018-2025 AstrevalRP'
